@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<title>Hello Flask</title>
+{% assets "css_all" %}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+{% endassets %}
+</head>
+   <body>
+      <table border = 0>
+         <thead>
+            <td>Name</td>
+            <td>Address>/td<
+            <td>city</td>
+            <td>Pincode</td>
+         </thead>
+         {% for row in rows %}
+            <tr>
+               <td>{{row["name"]}}</td>
+               <td>{{row["addr"]}}</td>
+               <td> {{ row["city"]}}</td>
+               <td>{{row['pin']}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+      <a href = "/enternew">New</a>
+   </body>
+   {% assets "js_all" %}
+       <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+   {% endassets %}
+</html>
