@@ -5,3 +5,20 @@ h1 {
   font: 24pt $font-stack;
   color: $primary-color;
 }
+
+td {
+    padding: 2em;
+}
+
+thead td {
+    font-weight: bolder;
+    border-bottom: 1px solid #000;
+}
+.cover-image {
+    background: url('static/img/14.png');
+}
+
+.center {
+    margin: 0 auto;
+    width: 500px;
+}

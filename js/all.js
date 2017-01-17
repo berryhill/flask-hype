@@ -1,4 +1,7 @@
 $(document).ready(function(){
-$('body').hide(1000);
-$('body').fadeIn(1000);
+// $('body').fadeOut();
+// $('body').fadeIn(1000);
+
+console.log(Backbone);
+
 });

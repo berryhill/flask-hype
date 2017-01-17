@@ -15,13 +15,14 @@ env.load_path = [
     os.path.join(os.path.dirname(__file__ ), 'js')
 ]
 
-
+bootstrap = assets.Bundle('bootstrap-sass/assets/stylesheets/_bootstrap.scss', filters='scss', output='bootstrap.scss')
 sass = assets.Bundle('*.sass', filters='sass', output='sass.css')
 scss = assets.Bundle('*.scss', filters='scss', output='scss.css')
 
 env.register(
     'css_all',
-    assets.Bundle(   scss,
+    assets.Bundle(   bootstrap,
+                     scss,
                      sass,
                      filters='cssmin',
                      output="all.css")
@@ -32,6 +33,8 @@ env.register(
     assets.Bundle(
         'jquery/dist/jquery.min.js',
         'all.js',
+        'underscore-min.js',
+        'backbone-min.js',
         output='all.js'
     )
 )
@@ -70,11 +73,6 @@ def addrec():
       finally:
          return render_template("result.html",msg = msg)
          con.close()
-
-
-
-
-
 
          # CREATE SQLITE TABLE
          # >>> import sqlite3
