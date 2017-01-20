@@ -34,33 +34,16 @@
        </div>
        <div class="section">
            <div class="container">
-               <div class="row">
-                   <div class="col-md-12">
-                       <div class="center">
-                             <table border = 0>
-                                <thead>
-                                   <td>Name</td>
-                                   <td>Address</td>
-                                   <td>City</td>
-                                   <td>Pincode</td>
-                                </thead>
-                                {% for row in rows %}
-                                   <tr>
-                                      <td>{{row["name"]}}</td>
-                                      <td>{{row["addr"]}}</td>
-                                      <td> {{ row["city"]}}</td>
-                                      <td>{{row['pin']}}</td>
-                                   </tr>
-                                {% endfor %}
-                             </table>
-                             <a href = "/enternew">New</a>
-                         </div>
-                   </div>
+               <div id="bp_data">
                </div>
            </div>
        </div>
-       <div id="todoapp">
-       </div>
+             <script>
+        var res = {{response|safe}}
+       for (r in res) {
+           console.log(res[r]);
+       }
+       </script>
    </body>
    {% assets "js_all" %}
        <script type="text/javascript" src="{{ ASSET_URL }}"></script>

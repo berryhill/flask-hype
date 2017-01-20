@@ -4,6 +4,8 @@ from builtins import str
 import sqlite3 as sql
 from flask import Flask, render_template, request, jsonify
 from flask.ext import assets
+import beatport
+import json
 
 app = Flask(__name__)
 
@@ -12,7 +14,8 @@ env = assets.Environment(app)
 env.load_path = [
     os.path.join(os.path.dirname(__file__), 'sass'),
     os.path.join(os.path.dirname(__file__), 'bower_components'),
-    os.path.join(os.path.dirname(__file__ ), 'js')
+    os.path.join(os.path.dirname(__file__ ), 'js'),
+    os.path.join(os.path.dirname(__file__ ), 'js/lib')
 ]
 
 bootstrap = assets.Bundle('bootstrap-sass/assets/stylesheets/_bootstrap.scss', filters='scss', output='bootstrap.scss')
@@ -32,12 +35,27 @@ env.register(
     'js_all',
     assets.Bundle(
         'jquery/dist/jquery.min.js',
-        'all.js',
         'underscore-min.js',
         'backbone-min.js',
+        'app.js',
         output='all.js'
     )
 )
+
+@app.route('/api/<args>')
+def getReleases(args):
+    try:
+        bp = beatport.API()
+        bp.start()
+        ids = ','.join(['43949','8190'])
+        data = {'ids':ids}
+        #'catalog/3/releases'
+        response = bp.request('catalog/3/' + args, data)
+        return render_template("list2.html", response=response)
+
+    except Exception as e:
+        print e
+        raise
 
 @app.route('/')
 def home():
@@ -46,7 +64,8 @@ def home():
    cur = con.cursor()
    cur.execute("select * from students")
    rows = cur.fetchall();
-   return render_template("list.html",rows = rows)
+
+   return render_template("list.html",rows = rows, stuff="stuff & things")
 
 @app.route('/enternew')
 def new_student():
@@ -79,5 +98,6 @@ def addrec():
          # >>> conn = sqlite3.connect('demo.db')
          # >>> conn.execute('CREATE TABLE students (name TEXT, addr TEXT, city TEXT, pin TEXT)')
          # <sqlite3.Cursor object at 0x7fddfc07a1f0>
-
          #export FLASK_APP=app.py
+
+# @app.route('')
