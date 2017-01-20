@@ -1,5 +1,17 @@
 $font-stack:    Helvetica, sans-serif;
-$primary-color: #8e8e8e;
+$primary-color: #ffffff;
+$background: #242222;
+
+body {
+    background: $background;
+}
+
+p {
+    padding: 2em;
+    font-size: 14pt;
+    color: $primary-color;
+}
+
 
 h1 {
   font: 24pt $font-stack;

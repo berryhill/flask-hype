@@ -5,7 +5,6 @@ import sqlite3 as sql
 from flask import Flask, render_template, request, jsonify
 from flask.ext import assets
 import beatport
-import json
 
 app = Flask(__name__)
 
@@ -51,14 +50,19 @@ def getReleases(args):
         data = {'ids':ids}
         #'catalog/3/releases'
         response = bp.request('catalog/3/' + args, data)
-        return render_template("list2.html", response=response)
+        return render_template("releases.html", response=response)
 
     except Exception as e:
         print e
         raise
 
+
 @app.route('/')
 def home():
+    return render_template('layout.html')
+
+@app.route('/sqlite')
+def sqlite_demo():
    con = sql.connect("demo.db")
    con.row_factory = sql.Row
    cur = con.cursor()

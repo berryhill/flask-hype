@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<title>Flask Hype</title>
+{% assets "css_all" %}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+{% endassets %}
+</head>
+   <body>
+       <div class="section">
+           <div class="container">
+               <div id="bp_data">
+                   <div class="col-md-6">
+                   <img id='bpOne' href='#'/>
+                   <p id="titleOne"></p>
+               </div>
+               <div class="col-md-6">
+                   <img id='bpTwo' href='#'/>
+                   <p id="titleTwo"></p>
+               </div>
+               </div>
+           </div>
+       </div>
+   </body>
+   {% assets "js_all" %}
+       <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+   {% endassets %}
+   <script>
+var res = {{response|safe}}
+for (r in res) {
+ var item = res[r];
+ console.log(res[r])
+ if (r === 'results') {
+     $('#bpOne').attr('src', item[0].images.small.url )
+     $('#titleOne').text(item[0].name)
+     $('#bpTwo').attr('src', item[1].images.small.url )
+      $('#titleTwo').text(item[1].name)
+  // console.log(item[0].name);
+  // console.log(item[0].images.small.url);
+  // console.log(item[1].name);
+  // console.log(item[1].images.small.url);
+ }
+}
+</script>
+</html>

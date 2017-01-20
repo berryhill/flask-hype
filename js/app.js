@@ -1,3 +1,6 @@
+//TODO: 'adapter' for API route to Backbone collection
+//TODO: see app_echofetch.js for examples with EchoNest and Soundcloud APIs
+
 //this in fat arrow?
 $(function(){
 var favedArtist = Backbone.Model.extend({
